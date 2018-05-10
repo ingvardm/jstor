@@ -45,6 +45,9 @@ const myStore = new Store(initialValues)
 console.log(myStore.props)
 // ["userName", "age"]
 
+// Get all values
+console.log(myStore.values)
+
 // Create a subscriber to handle all store events
 function subscriber(newState){
     console.log(newState)
@@ -53,7 +56,6 @@ function subscriber(newState){
 // Supscribe to all store events
 myStore.subscribe(subscriber)
 // will call subscriber with curent values
-// and will console.log the initial values
 
 // Unsubscribe
 myStore.unsubscribe(subscriber)
@@ -62,18 +64,15 @@ myStore.unsubscribe(subscriber)
 function onAgeChange(age){
     console.log(`user age changed to: ${age}`)
 }
+// Subscribe for prop updates
 myStore.on('age', onAgeChange)
 
 // Unsubscribe from prop updates
 myStore.off('age', onAgeChange)
 
-// await for prop update
-async function waitForPropChange(prop) {
-    let userName = await myStore.next('userName')
-    console.log(userName)
-}
-
-waitForPropChange('userName')
+// Subscribe for one next update
+// Will fire only once when the prop changes
+myStore.one('age', onAgeChange)
 
 // Get store values
 let { userName, age } = myStore
