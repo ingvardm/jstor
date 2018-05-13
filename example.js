@@ -1,4 +1,4 @@
-const Store = require('./dist/index').default
+const Store = require('./dist/jstor.min').default
 
 // Create initial state
 initialValues = {
