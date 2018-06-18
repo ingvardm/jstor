@@ -9,7 +9,7 @@ Fertures
 * Simple to use
 * Can be used to create your own store
 * No proxies inside!
-* No reducers, dispatchers and other nonsence
+* No reducers, dispatchers or other nonsence
 
 Usage
 ===
@@ -43,7 +43,7 @@ Usage
 <summary>show example</summary>
 
 ```js
-const Store = require('./dist/index').default
+import Store from 'jstor'
 
 // Create initial state
 initialValues = {
@@ -100,6 +100,11 @@ myStore.updateMultiple({
 })
 ```
 </details>
+
+TODO
+===
+- [ ] tests
+- [ ] middleware for value setter
 
 Contibutions
 ===
