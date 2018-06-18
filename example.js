@@ -1,5 +1,3 @@
-const Store = require('./dist/jstor.min').default
-
 // Create initial state
 initialValues = {
     userName: 'Yosi',
