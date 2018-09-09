@@ -49,11 +49,9 @@ export default class Store {
         if (this.hasOwnProperty(prop)) throw 'attempted to create duplicate prop'
         this._values[prop] = value
         Object.defineProperty(this, prop, {
-            get() {
-                return this._values[prop]
-            },
+            get: _=> this._valueGetter(prop),
             set(value) {
-                this._values[prop] = value
+                this._valueSetter(prop, value)
                 if (this._propSubscribers[prop]) updateSubscribers(this._propSubscribers[prop], value)
                 updateSubscribers(this._subscribers, this.values)
             },
@@ -61,6 +59,21 @@ export default class Store {
             configurable: true
         })
     }
+
+    /**
+     * @function _valueGetter default getter for a prop
+     * @param { string } prop prop name
+     * 
+     * @returns { any } returns value for the prop
+     */
+    _valueGetter = prop => this._values[prop]
+
+    /**
+     * @function _valueSetter default setter for a prop
+     * @param { string } prop prop name
+     * @param { any } vlaue prop value
+     */
+    _valueSetter = (prop, value) => this._values[prop] = value
 
     /**
      * @function addMultipleProps add multiple props that will fire callbacks when changed
@@ -77,7 +90,7 @@ export default class Store {
      * @param { strng } prop a prop name to remove from store
      */
     removeProp = prop => {
-        if (!this.hasOwnProperty(prop)) trow`${prop} doesnt exist in {${this.props.join(', ')}}`
+        if (!this.hasOwnProperty(prop)) trow `${prop} doesnt exist in {${this.props.join(', ')}}`
         delete this._values[prop]
         delete this._propSubscribers[prop]
         updateSubscribers(this._propSubscribers[prop], null)
@@ -85,10 +98,10 @@ export default class Store {
     }
 
     /**
-     * @function updateMultiple update multiple props and fire callbacks
+     * @function updateMultipleProps update multiple props and fire callbacks
      * @param { Object } values a set of key:value pairs to update
      */
-    updateMultiple = values => {
+    updateMultipleProps = values => {
         for (let prop in values) {
             let newValue = values[prop]
             this._values[prop] = newValue

@@ -1,10 +1,12 @@
-var path = require('path');
-var webpack = require('webpack');
 module.exports = {
-    entry: './src/index.js',
+    entry: {
+        home: './src/index.js'
+    },
     output: {
-        filename: 'index.js',
-        libraryTarget: 'commonjs'
+        globalObject: 'typeof self !== \'undefined\' ? self : this',
+        library: 'jstor',
+        libraryTarget: 'umd',
+        filename: 'index.js'
     },
     module: {
         rules: [
@@ -12,9 +14,9 @@ module.exports = {
                 test: /\.js$/,
                 loader: 'babel-loader',
                 query: {
-                    presets: ["stage-0"]
+                    presets: ['es2015', 'stage-0']
                 }
             }
         ]
     }
-};
+  };

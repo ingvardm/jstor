@@ -1,3 +1,5 @@
+const Store = require('./dist/index').default
+
 // Create initial state
 initialValues = {
     userName: 'Yosi',
@@ -47,7 +49,7 @@ let { userName, age } = myStore
 myStore.age = 23
 
 // Set multiple values
-myStore.updateMultiple({
+myStore.updateMultipleProps({
     age:24,
     userName: 'Elizabeth'
 })
