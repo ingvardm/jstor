@@ -85,10 +85,10 @@ export default class Store {
     }
 
     /**
-     * @function updateMultiple update multiple props and fire callbacks
+     * @function updateMultipleProps update multiple props and fire callbacks
      * @param { Object } values a set of key:value pairs to update
      */
-    updateMultiple = values => {
+    updateMultipleProps = values => {
         for (let prop in values) {
             let newValue = values[prop]
             this._values[prop] = newValue
