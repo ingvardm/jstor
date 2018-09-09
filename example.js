@@ -1,3 +1,5 @@
+const Store = require('./dist/index').default
+
 // Create initial state
 initialValues = {
     userName: 'Yosi',
