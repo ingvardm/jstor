@@ -90,7 +90,7 @@ export default class Store {
      * @param { strng } prop a prop name to remove from store
      */
     removeProp = prop => {
-        if (!this.hasOwnProperty(prop)) trow`${prop} doesnt exist in {${this.props.join(', ')}}`
+        if (!this.hasOwnProperty(prop)) trow `${prop} doesnt exist in {${this.props.join(', ')}}`
         delete this._values[prop]
         delete this._propSubscribers[prop]
         updateSubscribers(this._propSubscribers[prop], null)
