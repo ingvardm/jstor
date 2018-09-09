@@ -49,7 +49,7 @@ let { userName, age } = myStore
 myStore.age = 23
 
 // Set multiple values
-myStore.updateMultiple({
+myStore.updateMultipleProps({
     age:24,
     userName: 'Elizabeth'
 })
