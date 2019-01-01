@@ -1,15 +1,5 @@
 import { updateSubscribers, removeElementFromArray } from './utils'
 
-/**
- * @function _combinePoints             combines series of points
- * 
- * @param   { Array[] }   points        array of points to be combined
- * @param   { Number }    groupLength   number of points that will be combined into one point
- * @param   { Number }    limit         number of points to be converted into one point
- * @param   { Function }  getStartTime  a function to get starting timestamp for first group e.g. first day of month
- * 
- * @returns { Array[] }                 returns new series with grouped points
- */
 export default class Store {
     /**
      * Create a store
