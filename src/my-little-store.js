@@ -111,7 +111,7 @@ export default class Store {
     /**
      * Remove multiple props
      * @function removeMultiple
-     * @param { Array: String } props an array of prop names to remove
+     * @param { Array } props an array of prop names to remove
      */
     removeMultiple = props => {
         for(let prop of props){

@@ -24,23 +24,57 @@ Usage
 | :--: | :-------: | :---------- |
 | addProp | `prop_name` | adds new prop to store |
 | addMultipleProps | `values` | adds multiple new props to store |
-| removeProp | `prop_name` | remove a prop from store |
-| updateMultiple | `values` | updates multiple props fom provided object |
+| remove | `prop_name` | remove a prop from store |
+| removeMultiple | `[prop1[, prop2[, ...[, propN]]]]` | removes multiple props from store
+| updateMultipleProps | `values` | updates multiple props fom provided object |
 | subscribe | `callback` | will fire your callback when any prop changes with current values |
 | unsubscribe | `callback` | unsubscribe a callback from store updates |
 | on | `prop_name, callback` | will fire your callback on prop updates with value |
 | off | `prop_name, callback` | unsubscribe from prop updates |
 | one | `prop_name, callback` | subscribe for next change |
+| addMiddleware | `prop, callback` | add a middleware function that will be called before the value setter, must return a value |
+| removeMiddleware | `prop` | removes middleware from prop |
 
 ## Getters
 | Name | Returns | Description |
 | :--: | :-----: | :---------- |
-| props | `array` | Returns an array with available props |
+| props | `array` | Returns an object with prop:prop pairs |
 | values | `values` | Returns object containing stored items |
 
 ## Examples
 [Simple usage](/docs/example.md)
 
+## Complete API documentation
+[API](/docs/api.md)
+
+## Development
+Install requirements
+===
+```bash
+yarn
+npm i
+```
+
+Build
+===
+```bash
+yarn build
+npm run build
+```
+
+Test
+===
+```bash
+yarn test
+npm test
+```
+
+Generate API documentation
+===
+```bash
+yarn docs
+npm run docs
+```
 
 TODO
 ===

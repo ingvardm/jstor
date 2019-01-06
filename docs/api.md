@@ -21,11 +21,17 @@
 <dt><a href="#_valueSetter">_valueSetter(prop, vlaue)</a></dt>
 <dd><p>Default setter for a prop</p>
 </dd>
-<dt><a href="#addMultipleProps">addMultipleProps(values)</a></dt>
-<dd><p>Add multiple props that will fire callbacks when changed</p>
+<dt><a href="#add">add(values)</a></dt>
+<dd><p>Add props that will fire callbacks when changed</p>
 </dd>
-<dt><a href="#removeProp">removeProp(prop)</a></dt>
-<dd><p>Add multiple props that will fire callbacks when changed</p>
+<dt><a href="#_removeProp">_removeProp(prop)</a></dt>
+<dd><p>Remove single prop</p>
+</dd>
+<dt><a href="#remove">remove(prop)</a></dt>
+<dd><p>Remove single prop</p>
+</dd>
+<dt><a href="#removeMultiple">removeMultiple(props)</a></dt>
+<dd><p>Remove multiple props</p>
 </dd>
 <dt><a href="#updateMultipleProps">updateMultipleProps(values)</a></dt>
 <dd><p>Update multiple props and fire callbacks</p>
@@ -46,10 +52,10 @@
 <dd><p>Subscribe to specific prop next update</p>
 </dd>
 <dt><a href="#addMiddleware">addMiddleware(prop, middleware)</a></dt>
-<dd><p>register middleware function for prop</p>
+<dd><p>Register middleware function for prop</p>
 </dd>
 <dt><a href="#removeMiddleware">removeMiddleware(prop)</a></dt>
-<dd><p>remove middleware function from prop setter</p>
+<dd><p>Remove middleware function from prop setter</p>
 </dd>
 </dl>
 
@@ -111,10 +117,10 @@ Default setter for a prop
 | prop | <code>string</code> | prop name |
 | vlaue | <code>any</code> | prop value |
 
-<a name="addMultipleProps"></a>
+<a name="add"></a>
 
-## addMultipleProps(values)
-Add multiple props that will fire callbacks when changed
+## add(values)
+Add props that will fire callbacks when changed
 
 **Kind**: global function  
 
@@ -122,16 +128,38 @@ Add multiple props that will fire callbacks when changed
 | --- | --- | --- |
 | values | <code>Object</code> | a set of key:value pairs to add |
 
-<a name="removeProp"></a>
+<a name="_removeProp"></a>
 
-## removeProp(prop)
-Add multiple props that will fire callbacks when changed
+## \_removeProp(prop)
+Remove single prop
 
 **Kind**: global function  
 
 | Param | Type | Description |
 | --- | --- | --- |
 | prop | <code>strng</code> | a prop name to remove from store |
+
+<a name="remove"></a>
+
+## remove(prop)
+Remove single prop
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| prop | <code>strng</code> | a prop name to remove from store |
+
+<a name="removeMultiple"></a>
+
+## removeMultiple(props)
+Remove multiple props
+
+**Kind**: global function  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| props | <code>Array</code> | an array of prop names to remove |
 
 <a name="updateMultipleProps"></a>
 
@@ -205,7 +233,7 @@ Subscribe to specific prop next update
 <a name="addMiddleware"></a>
 
 ## addMiddleware(prop, middleware)
-register middleware function for prop
+Register middleware function for prop
 
 **Kind**: global function  
 
@@ -217,7 +245,7 @@ register middleware function for prop
 <a name="removeMiddleware"></a>
 
 ## removeMiddleware(prop)
-remove middleware function from prop setter
+Remove middleware function from prop setter
 
 **Kind**: global function  
 
