@@ -1,0 +1,68 @@
+Arguments: 
+  /usr/local/Cellar/node@8/8.9.4/bin/node /usr/local/Cellar/yarn/1.5.1/libexec/bin/yarn.js test
+
+PATH: 
+  /Users/igor/.fastlane/bin:/usr/local/opt/node@8/bin:/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Users/igor/Library/Android/sdk/tools:/Users/igor/Library/Android/sdk/emulator:/Users/igor/Library/Android/sdk/platform-tools
+
+Yarn version: 
+  1.5.1
+
+Node version: 
+  8.9.4
+
+Platform: 
+  darwin x64
+
+npm manifest: 
+  {
+    "name": "jstor",
+    "version": "1.0.1",
+    "description": "Light-weight and simple store library",
+    "main": "dist/index.js",
+    "jsnext:main": "src/my-little-store.js",
+    "dependencies": {},
+    "devDependencies": {
+      "babel-core": "^6.26.3",
+      "babel-jest": "^23.6.0",
+      "babel-loader": "^7.1.4",
+      "babel-preset-es2015": "^6.24.1",
+      "babel-preset-stage-0": "^6.24.1",
+      "jest": "^23.6.0",
+      "regenerator-runtime": "^0.13.1",
+      "webpack": "^4.12.0",
+      "webpack-cli": "^3.1.0"
+    },
+    "scripts": {
+      "test": "jest",
+      "build": "webpack",
+      "docs": "jsdoc2md src/my-little-store.js > docs/api.md"
+    },
+    "keywords": [
+      "store",
+      "obsrvable"
+    ],
+    "author": "Igor",
+    "license": "GPL-3.0"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: Command failed.
+  Exit code: 1
+  Command: sh
+  Arguments: -c jest
+  Directory: /Users/igor/projects/Store
+  Output:
+  
+      at ProcessTermError.MessageError (/usr/local/Cellar/yarn/1.5.1/libexec/lib/cli.js:186:110)
+      at new ProcessTermError (/usr/local/Cellar/yarn/1.5.1/libexec/lib/cli.js:226:113)
+      at ChildProcess.<anonymous> (/usr/local/Cellar/yarn/1.5.1/libexec/lib/cli.js:30281:17)
+      at emitTwo (events.js:126:13)
+      at ChildProcess.emit (events.js:214:7)
+      at maybeClose (internal/child_process.js:925:16)
+      at Process.ChildProcess._handle.onexit (internal/child_process.js:209:5)

@@ -6,7 +6,7 @@ export default class Store {
      * @param { Object } initialValues a set of key:value pairs
      */
     constructor(initialValues = {}) {
-        this.addMultipleProps(initialValues)
+        this.add(initialValues)
     }
 
     // stores the values
@@ -18,77 +18,112 @@ export default class Store {
     // stores subscribers that will fire on a specific prop change
     _propSubscribers = {}
 
+    // middleware
+    _middleware = {}
+
+    // store props as constants
+    _props = {}
+
     /**
-     * @function values get all stored values
-     * @returns { Object } returns key:value pairs
+     * Get all stored values
+     * @param values
+     * @type { Object } returns key:value pairs
      */
     get values() { return { ...this._values } }
 
     /**
-     * @function props get all stored props
-     * @returns { Array } returns prop names
+     * Get all stored props
+     * @param props
+     * @type { Object } returns prop names
      */
-    get props() { return Object.keys(this._values) }
+    get props() { return this._props }
 
     /**
-     * @function addProp add a prop that will fire callbacks when changed
+     * Add a prop that will fire callbacks when changed
+     * @function addProp
      * @param { string } prop prop name
      * @param { any } vlaue prop value
      */
-    addProp = (prop, value) => {
+    _addProp = (prop, value) => {
         if (this.hasOwnProperty(prop)) throw 'attempted to create duplicate prop'
         this._values[prop] = value
+        this._props[prop] = prop
         Object.defineProperty(this, prop, {
             get: _=> this._valueGetter(prop),
             set(value) {
+                if(!!this._middleware[prop]) value = this._middleware[prop](value)
                 this._valueSetter(prop, value)
-                if (this._propSubscribers[prop]) updateSubscribers(this._propSubscribers[prop], value)
-                updateSubscribers(this._subscribers, this.values)
+                if (this._propSubscribers[prop]) updateSubscribers(this._propSubscribers[prop], this[prop])
+                if (this._subscribers) updateSubscribers(this._subscribers, this.values)
             },
             enumerable: true,
-            configurable: true
+            configurable: true,
         })
     }
 
     /**
-     * @function _valueGetter default getter for a prop
+     * Default getter for a prop
+     * @function _valueGetter
      * @param { string } prop prop name
-     * 
      * @returns { any } returns value for the prop
      */
     _valueGetter = prop => this._values[prop]
 
     /**
-     * @function _valueSetter default setter for a prop
+     * Default setter for a prop
+     * @function _valueSetter
      * @param { string } prop prop name
      * @param { any } vlaue prop value
      */
     _valueSetter = (prop, value) => this._values[prop] = value
 
     /**
-     * @function addMultipleProps add multiple props that will fire callbacks when changed
+     * Add props that will fire callbacks when changed
+     * @function add
      * @param { Object } values a set of key:value pairs to add
      */
-    addMultipleProps = values => {
-        for (let prop in values) {
-            this.addProp(prop, values[prop])
-        }
+    add = values => {
+        for (let prop in values) this._addProp(prop, values[prop])
     }
 
     /**
-     * @function removeProp add multiple props that will fire callbacks when changed
+     * Remove single prop
+     * @function _removeProp
      * @param { strng } prop a prop name to remove from store
      */
-    removeProp = prop => {
-        if (!this.hasOwnProperty(prop)) trow `${prop} doesnt exist in {${this.props.join(', ')}}`
+    _removeProp = prop => {
+        if (!this.hasOwnProperty(prop)) return
         delete this._values[prop]
         delete this._propSubscribers[prop]
-        updateSubscribers(this._propSubscribers[prop], null)
-        updateSubscribers(this._subscribers, this.values)
     }
 
     /**
-     * @function updateMultipleProps update multiple props and fire callbacks
+     * Remove single prop
+     * @function remove
+     * @param { strng } prop a prop name to remove from store
+     */
+    remove = prop => {
+        this._removeProp(prop)
+        if (this._propSubscribers[prop]) updateSubscribers(this._propSubscribers[prop], null)
+        if (this._subscribers) updateSubscribers(this._subscribers, this.values)
+    }
+
+    /**
+     * Remove multiple props
+     * @function removeMultiple
+     * @param { Array: String } props an array of prop names to remove
+     */
+    removeMultiple = props => {
+        for(let prop of props){
+            this._removeProp(prop)
+            if (this._propSubscribers[prop]) updateSubscribers(this._propSubscribers[prop], null)
+        }
+        if (this._subscribers) updateSubscribers(this._subscribers, this.values)
+    }
+
+    /**
+     * Update multiple props and fire callbacks
+     * @function updateMultipleProps
      * @param { Object } values a set of key:value pairs to update
      */
     updateMultipleProps = values => {
@@ -97,11 +132,12 @@ export default class Store {
             this._values[prop] = newValue
             if (this._propSubscribers[prop]) updateSubscribers(this._propSubscribers[prop], newValue)
         }
-        updateSubscribers(this._subscribers, this.values)
+        if (this._subscribers) updateSubscribers(this._subscribers, this.values)
     }
 
     /**
-     * @function subscribe add a callback that will be fired on every change
+     * Add a callback that will be fired on every change
+     * @function subscribe
      * @param { function } subscriber a function that will be called with updated values
      */
     subscribe = subscriber => {
@@ -111,7 +147,8 @@ export default class Store {
     }
 
     /**
-     * @function unsubscribe unsubscribe a function from updates
+     * Unsubscribe a function from updates
+     * @function unsubscribe
      * @param { function } subscriber a function to remove from subscribers
      */
     unsubscribe = subscriber => {
@@ -119,7 +156,8 @@ export default class Store {
     }
 
     /**
-     * @function on subscribe to specific prop update
+     * Subscribe to specific prop update
+     * @function on
      * @param { string } prop prop name to subscribe to
      * @param { function } subscriber a function that will be called when value changes with new and old values as arguments
      */
@@ -133,7 +171,8 @@ export default class Store {
     }
 
     /**
-     * @function off unsubscribe from specific prop update
+     * Unsubscribe from specific prop update
+     * @function off
      * @param { string } prop prop name to unsubscribe from
      * @param { function } subscriber a function to remove from prop subscribers
      */
@@ -144,7 +183,8 @@ export default class Store {
     }
 
     /**
-     * @function one subscribe to specific prop next update
+     * Subscribe to specific prop next update
+     * @function one
      * @param { string } prop prop name to subscribe to
      * @param { function } subscriber a function that will be called when value changes with new and old values as arguments
      */
@@ -154,5 +194,27 @@ export default class Store {
             subscriber(value)
         }
         this.on(prop, oneTimeSubscriber)
+    }
+
+    /**
+     * Register middleware function for prop
+     * @function addMiddleware
+     * @param { string } prop prop name
+     * @param { function } middleware a function that will be called with new value and return modified value
+     */
+    addMiddleware = (prop, middleware) => {
+        if (!prop || !middleware) throw 'must suply prop name and middleware'
+        if (!this.hasOwnProperty(prop)) throw `${prop} doesn't exist in {${this.props.join(', ')}}`
+        this._middleware[prop] = middleware
+    }
+
+    /**
+     * Remove middleware function from prop setter
+     * @function removeMiddleware
+     * @param { string } prop prop name
+     */
+    removeMiddleware = (prop) => {
+        if (!prop || !this.hasOwnProperty(prop)) throw `${prop} doesn't exist in {${this.props.join(', ')}}`
+        delete this._middleware[prop]
     }
 }

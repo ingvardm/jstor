@@ -1,6 +1,7 @@
-const Store = require('./dist/index').default
+## Simple store
 
-// import Store from 'my-little-store'
+```js
+import Store from 'my-little-store'
 
 const myLittleStore = new Store({
     counter: 0
@@ -10,7 +11,7 @@ function onCounterUpdate(count){
     console.log(`counter value updated to: ${count}`)
 }
 
-myLittleStore.on(myLittleStore.props.counter, onCounterUpdate)
+myLittleStore.on('counter', onCounterUpdate)
 
 function increaseCounter(){
     myLittleStore.counter++
@@ -18,6 +19,11 @@ function increaseCounter(){
 
 increaseCounter()
 
+```
+
+## Extended store
+
+```js
 function getDataFromServer(){
     return new Promise(res => {
         setTimeout(res, 1000)
@@ -53,3 +59,4 @@ ExtStore.addMiddleware(ExtStore.props.counter, middlware)
 ExtStore.on(ExtStore.props.hydrated, onHydrated)
 
 ExtStore.hydrate()
+```
