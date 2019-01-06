@@ -1,6 +1,7 @@
 {
   "name": "my-little-store",
-  "version": "1.0.1",
+  "version": "1.0.2",
+  "homepage" : "https://github.com/ingvardm/jstor",
   "description": "Light-weight and simple store library",
   "main": "dist/index.js",
   "jsnext:main": "src/my-little-store.js",
