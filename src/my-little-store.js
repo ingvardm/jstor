@@ -1,9 +1,13 @@
 import { updateSubscribers, removeElementFromArray } from './utils'
+/**
+ * @class Store
+ * @classdesc A store that will fire callbacks when its values are changed
+ */
 
 export default class Store {
     /**
      * Create a store
-     * @param { Object } initialValues a set of key:value pairs
+     * @param { Object.<string, any> } initialValues a set of key:value pairs
      */
     constructor(initialValues = {}) {
         this.add(initialValues)
@@ -26,20 +30,19 @@ export default class Store {
 
     /**
      * Get all stored values
-     * @param values
      * @type { Object } returns key:value pairs
      */
     get values() { return { ...this._values } }
 
     /**
      * Get all stored props
-     * @param props
      * @type { Object } returns prop names
      */
     get props() { return this._props }
 
     /**
      * Add a prop that will fire callbacks when changed
+     * @private
      * @function addProp
      * @param { string } prop prop name
      * @param { any } vlaue prop value
@@ -63,6 +66,7 @@ export default class Store {
 
     /**
      * Default getter for a prop
+     * @private
      * @function _valueGetter
      * @param { string } prop prop name
      * @returns { any } returns value for the prop
@@ -71,6 +75,7 @@ export default class Store {
 
     /**
      * Default setter for a prop
+     * @private
      * @function _valueSetter
      * @param { string } prop prop name
      * @param { any } vlaue prop value
@@ -80,7 +85,7 @@ export default class Store {
     /**
      * Add props that will fire callbacks when changed
      * @function add
-     * @param { Object } values a set of key:value pairs to add
+     * @param { Object.<string, any> } values a set of key:value pairs to add
      */
     add = values => {
         for (let prop in values) this._addProp(prop, values[prop])
@@ -88,6 +93,7 @@ export default class Store {
 
     /**
      * Remove single prop
+     * @private
      * @function _removeProp
      * @param { strng } prop a prop name to remove from store
      */
@@ -98,25 +104,19 @@ export default class Store {
     }
 
     /**
-     * Remove single prop
+     * Remove props
      * @function remove
-     * @param { strng } prop a prop name to remove from store
+     * @param { strng | Array.<string> } prop a prop or array of props to remove from store
      */
-    remove = prop => {
-        this._removeProp(prop)
-        if (this._propSubscribers[prop]) updateSubscribers(this._propSubscribers[prop], null)
-        if (this._subscribers) updateSubscribers(this._subscribers, this.values)
-    }
-
-    /**
-     * Remove multiple props
-     * @function removeMultiple
-     * @param { Array } props an array of prop names to remove
-     */
-    removeMultiple = props => {
-        for(let prop of props){
-            this._removeProp(prop)
-            if (this._propSubscribers[prop]) updateSubscribers(this._propSubscribers[prop], null)
+    remove = props => {
+        if(Array.isArray(props)){
+            for(let prop of props){
+                this._removeProp(prop)
+                if (this._propSubscribers[prop]) updateSubscribers(this._propSubscribers[prop], null)
+            }
+        } else {
+            this._removeProp(props)
+            if (this._propSubscribers[prop]) updateSubscribers(this._propSubscribers[props], null)
         }
         if (this._subscribers) updateSubscribers(this._subscribers, this.values)
     }
@@ -124,7 +124,7 @@ export default class Store {
     /**
      * Update multiple props and fire callbacks
      * @function updateMultipleProps
-     * @param { Object } values a set of key:value pairs to update
+     * @param { Object.<string, any> } values a set of key:value pairs to update
      */
     updateMultipleProps = values => {
         for (let prop in values) {
@@ -138,7 +138,7 @@ export default class Store {
     /**
      * Add a callback that will be fired on every change
      * @function subscribe
-     * @param { function } subscriber a function that will be called with updated values
+     * @param { callback } subscriber a function that will be called with updated values
      */
     subscribe = subscriber => {
         if (!subscriber) throw 'must suply subscriber'
@@ -218,3 +218,9 @@ export default class Store {
         delete this._middleware[prop]
     }
 }
+
+/**
+ * Subscriber callback
+ * @callback subscriber
+ * @param {any} updates
+ */

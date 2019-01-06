@@ -1,3 +1,11 @@
+## Classes
+
+<dl>
+<dt><a href="#Store">Store</a></dt>
+<dd><p>A store that will fire callbacks when its values are changed</p>
+</dd>
+</dl>
+
 ## Members
 
 <dl>
@@ -12,26 +20,11 @@
 ## Functions
 
 <dl>
-<dt><a href="#addProp">addProp(prop, vlaue)</a></dt>
-<dd><p>Add a prop that will fire callbacks when changed</p>
-</dd>
-<dt><a href="#_valueGetter">_valueGetter(prop)</a> ⇒ <code>any</code></dt>
-<dd><p>Default getter for a prop</p>
-</dd>
-<dt><a href="#_valueSetter">_valueSetter(prop, vlaue)</a></dt>
-<dd><p>Default setter for a prop</p>
-</dd>
 <dt><a href="#add">add(values)</a></dt>
 <dd><p>Add props that will fire callbacks when changed</p>
 </dd>
-<dt><a href="#_removeProp">_removeProp(prop)</a></dt>
-<dd><p>Remove single prop</p>
-</dd>
 <dt><a href="#remove">remove(prop)</a></dt>
-<dd><p>Remove single prop</p>
-</dd>
-<dt><a href="#removeMultiple">removeMultiple(props)</a></dt>
-<dd><p>Remove multiple props</p>
+<dd><p>Remove props</p>
 </dd>
 <dt><a href="#updateMultipleProps">updateMultipleProps(values)</a></dt>
 <dd><p>Update multiple props and fire callbacks</p>
@@ -59,64 +52,32 @@
 </dd>
 </dl>
 
+## Typedefs
+
+<dl>
+<dt><a href="#subscriber">subscriber</a> : <code>function</code></dt>
+<dd><p>Subscriber callback</p>
+</dd>
+</dl>
+
+<a name="Store"></a>
+
+## Store
+A store that will fire callbacks when its values are changed
+
+**Kind**: global class  
 <a name="values"></a>
 
 ## values : <code>Object</code>
 Get all stored values
 
 **Kind**: global variable  
-
-| Param |
-| --- |
-| values | 
-
 <a name="props"></a>
 
 ## props : <code>Object</code>
 Get all stored props
 
 **Kind**: global variable  
-
-| Param |
-| --- |
-| props | 
-
-<a name="addProp"></a>
-
-## addProp(prop, vlaue)
-Add a prop that will fire callbacks when changed
-
-**Kind**: global function  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| prop | <code>string</code> | prop name |
-| vlaue | <code>any</code> | prop value |
-
-<a name="_valueGetter"></a>
-
-## \_valueGetter(prop) ⇒ <code>any</code>
-Default getter for a prop
-
-**Kind**: global function  
-**Returns**: <code>any</code> - returns value for the prop  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| prop | <code>string</code> | prop name |
-
-<a name="_valueSetter"></a>
-
-## \_valueSetter(prop, vlaue)
-Default setter for a prop
-
-**Kind**: global function  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| prop | <code>string</code> | prop name |
-| vlaue | <code>any</code> | prop value |
-
 <a name="add"></a>
 
 ## add(values)
@@ -126,40 +87,18 @@ Add props that will fire callbacks when changed
 
 | Param | Type | Description |
 | --- | --- | --- |
-| values | <code>Object</code> | a set of key:value pairs to add |
-
-<a name="_removeProp"></a>
-
-## \_removeProp(prop)
-Remove single prop
-
-**Kind**: global function  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| prop | <code>strng</code> | a prop name to remove from store |
+| values | <code>Object.&lt;string, any&gt;</code> | a set of key:value pairs to add |
 
 <a name="remove"></a>
 
 ## remove(prop)
-Remove single prop
+Remove props
 
 **Kind**: global function  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| prop | <code>strng</code> | a prop name to remove from store |
-
-<a name="removeMultiple"></a>
-
-## removeMultiple(props)
-Remove multiple props
-
-**Kind**: global function  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| props | <code>Array</code> | an array of prop names to remove |
+| prop | <code>strng</code> \| <code>Array.&lt;string&gt;</code> | a prop or array of props to remove from store |
 
 <a name="updateMultipleProps"></a>
 
@@ -170,7 +109,7 @@ Update multiple props and fire callbacks
 
 | Param | Type | Description |
 | --- | --- | --- |
-| values | <code>Object</code> | a set of key:value pairs to update |
+| values | <code>Object.&lt;string, any&gt;</code> | a set of key:value pairs to update |
 
 <a name="subscribe"></a>
 
@@ -181,7 +120,7 @@ Add a callback that will be fired on every change
 
 | Param | Type | Description |
 | --- | --- | --- |
-| subscriber | <code>function</code> | a function that will be called with updated values |
+| subscriber | <code>callback</code> | a function that will be called with updated values |
 
 <a name="unsubscribe"></a>
 
@@ -252,4 +191,15 @@ Remove middleware function from prop setter
 | Param | Type | Description |
 | --- | --- | --- |
 | prop | <code>string</code> | prop name |
+
+<a name="subscriber"></a>
+
+## subscriber : <code>function</code>
+Subscriber callback
+
+**Kind**: global typedef  
+
+| Param | Type |
+| --- | --- |
+| updates | <code>any</code> | 
 
