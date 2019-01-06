@@ -14,12 +14,12 @@ Fertures
 Usage
 ===
 
-## Constructor
+### Constructor
 | Arguments | Description |
 | --------- | ----------- |
 | `values`  | object with initial values that will be stored |
 
-## Methods
+### Methods
 | Name | arguments | Description |
 | :--: | :-------: | :---------- |
 | addProp | `prop` | adds new prop to store |
@@ -35,52 +35,56 @@ Usage
 | addMiddleware | `prop, callback` | add a middleware function that will be called before the value setter, must return a value |
 | removeMiddleware | `prop` | removes middleware from prop |
 
-## Getters
+### Getters
 | Name | Returns | Description |
 | :--: | :-----: | :---------- |
 | props | `array` | Returns an object with prop:prop pairs |
 | values | `values` | Returns object containing stored items |
 
-## Examples
+Examples
+===
 [Simple usage](/docs/example.md)
 
-## Complete API documentation
+Complete API documentation
+===
 [API](/docs/api.md)
 
-## Development
-#### Install requirements
+Development
+===
+### Install requirements
 
 ```bash
 yarn
 npm i
 ```
 
-#### Build
+### Build
 
 ```bash
 yarn build
 npm run build
 ```
 
-#### Test
+### Test
 
 ```bash
 yarn test
 npm test
 ```
 
-#### Generate API documentation
+### Generate API documentation
 
 ```bash
 yarn docs
 npm run docs
 ```
 
-#### TODO
+### TODO
 
 - [ ] tests
 
-## Contibutions
+Contibutions
+===
 
 Yes, please!
 
