@@ -1,5 +1,5 @@
 {
-  "name": "jstor",
+  "name": "my-little-store",
   "version": "1.0.1",
   "description": "Light-weight and simple store library",
   "main": "dist/index.js",
