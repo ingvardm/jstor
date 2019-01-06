@@ -1,10 +1,10 @@
 module.exports = {
     entry: {
-        home: './src/index.js'
+        home: './src/my-little-store.js'
     },
     output: {
         globalObject: 'typeof self !== \'undefined\' ? self : this',
-        library: 'jstor',
+        library: 'my-little-store',
         libraryTarget: 'umd',
         filename: 'index.js'
     },
