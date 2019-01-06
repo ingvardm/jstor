@@ -30,13 +30,13 @@ export default class Store {
 
     /**
      * Get all stored values
-     * @type { Object } returns key:value pairs
+     * @type { Object }
      */
     get values() { return { ...this._values } }
 
     /**
      * Get all stored props
-     * @type { Object } returns prop names
+     * @type { Object }
      */
     get props() { return this._props }
 
@@ -123,10 +123,10 @@ export default class Store {
 
     /**
      * Update multiple props and fire callbacks
-     * @function updateMultipleProps
+     * @function update
      * @param { Object.<string, any> } values a set of key:value pairs to update
      */
-    updateMultipleProps = values => {
+    update = values => {
         for (let prop in values) {
             let newValue = values[prop]
             this._values[prop] = newValue
@@ -223,4 +223,11 @@ export default class Store {
  * Subscriber callback
  * @callback subscriber
  * @param {any} updates
+ */
+
+ /**
+ * Subscriber callback
+ * @callback middleware
+ * @param { any } update updated value
+ * @returns { any } modified value
  */

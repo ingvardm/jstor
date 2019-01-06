@@ -26,7 +26,7 @@
 <dt><a href="#remove">remove(prop)</a></dt>
 <dd><p>Remove props</p>
 </dd>
-<dt><a href="#updateMultipleProps">updateMultipleProps(values)</a></dt>
+<dt><a href="#update">update(values)</a></dt>
 <dd><p>Update multiple props and fire callbacks</p>
 </dd>
 <dt><a href="#subscribe">subscribe(subscriber)</a></dt>
@@ -56,6 +56,9 @@
 
 <dl>
 <dt><a href="#subscriber">subscriber</a> : <code>function</code></dt>
+<dd><p>Subscriber callback</p>
+</dd>
+<dt><a href="#middleware">middleware</a> ⇒ <code>any</code></dt>
 <dd><p>Subscriber callback</p>
 </dd>
 </dl>
@@ -100,9 +103,9 @@ Remove props
 | --- | --- | --- |
 | prop | <code>strng</code> \| <code>Array.&lt;string&gt;</code> | a prop or array of props to remove from store |
 
-<a name="updateMultipleProps"></a>
+<a name="update"></a>
 
-## updateMultipleProps(values)
+## update(values)
 Update multiple props and fire callbacks
 
 **Kind**: global function  
@@ -202,4 +205,16 @@ Subscriber callback
 | Param | Type |
 | --- | --- |
 | updates | <code>any</code> | 
+
+<a name="middleware"></a>
+
+## middleware ⇒ <code>any</code>
+Subscriber callback
+
+**Kind**: global typedef  
+**Returns**: <code>any</code> - modified value  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| update | <code>any</code> | updated value |
 
