@@ -1,6 +1,6 @@
 {
   "name": "my-little-store",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "homepage" : "https://github.com/ingvardm/jstor",
   "description": "Light-weight and simple store library",
   "main": "dist/index.js",
