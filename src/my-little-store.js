@@ -115,8 +115,9 @@ export default class Store {
                 if (this._propSubscribers[prop]) updateSubscribers(this._propSubscribers[prop], null)
             }
         } else {
-            this._removeProp(props)
-            if (this._propSubscribers[prop]) updateSubscribers(this._propSubscribers[props], null)
+            const prop = props
+            this._removeProp(prop)
+            if (this._propSubscribers[prop]) updateSubscribers(this._propSubscribers[prop], null)
         }
         if (this._subscribers) updateSubscribers(this._subscribers, this.values)
     }
