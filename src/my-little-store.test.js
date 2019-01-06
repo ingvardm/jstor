@@ -35,22 +35,8 @@ describe('Basic functions', () => {
     })
 
     test('remove multiple props', () => {
-        store.removeMultiple([store.props.addedPropA, store.props.addedPropB])
+        store.remove([store.props.addedPropA, store.props.addedPropB])
         expect(store[store.props.addedPropA]).toBeUndefined()
         expect(store[store.props.addedPropB]).toBeUndefined()
-    })
-})
-
-describe('Update subscribers', () => {
-    const initialValues = {
-        updatingValue: 0
-    }
-
-    const store = new MyLittleStore(initialValues)
-
-    const subscriberFunction = _ => new Promise(resolve)
-
-    test('subscribe for an update', {
-
     })
 })
