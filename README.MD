@@ -48,11 +48,11 @@ Usage
 
 Examples
 ===
-[Simple usage](/docs/example.md)
+[Simple usage](https://github.com/ingvardm/jstor/docs/example.md)
 
 Complete API documentation
 ===
-[API](/docs/api.md)
+[API](https://github.com/ingvardm/jstor/docs/api.md)
 
 Development
 ===
@@ -86,12 +86,12 @@ npm run docs
 
 ### TODO
 
-- [ ] tests
+- [ ] [1.0.4 release](https://github.com/ingvardm/jstor/projects/1)
 
 Contibutions
 ===
 
-Yes, please!
+Pick a task [here](https://github.com/ingvardm/jstor/projects)
 
 Also [this](https://git-scm.com/book/en/v2/GitHub-Contributing-to-a-Project)
 
