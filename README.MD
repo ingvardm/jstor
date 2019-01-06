@@ -11,6 +11,13 @@ Fertures
 * No proxies inside!
 * No reducers, dispatchers or other nonsence
 
+Instalation
+===
+```bash
+npm i my-little-store -S
+yarn add my-little-store
+```
+
 Usage
 ===
 
