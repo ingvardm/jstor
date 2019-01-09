@@ -48,11 +48,11 @@ Usage
 
 Examples
 ===
-[Simple usage](https://github.com/ingvardm/jstor/docs/example.md)
+[Simple usage](https://github.com/ingvardm/jstor/blob/master/docs/example.md)
 
 Complete API documentation
 ===
-[API](https://github.com/ingvardm/jstor/docs/api.md)
+[API](https://github.com/ingvardm/jstor/blob/master/docs/api.md)
 
 Development
 ===
