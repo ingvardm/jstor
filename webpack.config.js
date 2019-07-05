@@ -1,6 +1,6 @@
 module.exports = {
     entry: {
-        home: './src/my-little-store.js'
+        home: './src/MyLittleStore.js'
     },
     output: {
         globalObject: 'typeof self !== \'undefined\' ? self : this',
@@ -14,9 +14,12 @@ module.exports = {
                 test: /\.js$/,
                 loader: 'babel-loader',
                 query: {
-                    presets: ['es2015', 'stage-0']
+                    presets: ['@babel/preset-env'],
+                    plugins: [
+                        '@babel/plugin-proposal-class-properties'
+                    ]
                 }
             }
         ]
     }
-  };
+};
