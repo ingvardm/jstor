@@ -23,6 +23,6 @@ export function removeElementFromArray(element, array) {
  * @param { Object.<string, any> } original the object to filter
  * @returns { Object.<string, any> } returns a new object
  */
-export function filterObject(keys, original) {
-    return keys.reduce((obj, key) => ({ ...obj, [key]: original[key] }), {});
+export function filterObject(filters, original) {
+    return Object.keys(filters).reduce((obj, key) => ({ ...obj, [key]: original[key] }), {});
 }

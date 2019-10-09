@@ -1,11 +1,3 @@
-## Classes
-
-<dl>
-<dt><a href="#Subscriber">Subscriber</a></dt>
-<dd><p>Subscriber</p>
-</dd>
-</dl>
-
 ## Functions
 
 <dl>
@@ -34,12 +26,6 @@
 </dd>
 </dl>
 
-<a name="Subscriber"></a>
-
-## Subscriber
-Subscriber
-
-**Kind**: global class  
 <a name="setCallback"></a>
 
 ## setCallback(callback)

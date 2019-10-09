@@ -1,11 +1,3 @@
-## Classes
-
-<dl>
-<dt><a href="#Store">Store</a></dt>
-<dd><p>A store that will fire callbacks when its values are changed</p>
-</dd>
-</dl>
-
 ## Members
 
 <dl>
@@ -25,12 +17,6 @@
 </dd>
 </dl>
 
-<a name="Store"></a>
-
-## Store
-A store that will fire callbacks when its values are changed
-
-**Kind**: global class  
 <a name="values"></a>
 
 ## values : <code>Object.&lt;string, any&gt;</code>
@@ -54,7 +40,7 @@ Update multiple props and fire callbacks
 Create a new Subscriber that will be updated on changes
 
 **Kind**: global function  
-**Returns**: <code>Subscriber</code> - returns new Subscriber  
+**Returns**: <code>Subscriber</code> - returns a new Subscriber instance  
 
 | Param | Type | Description |
 | --- | --- | --- |

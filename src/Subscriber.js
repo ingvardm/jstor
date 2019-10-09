@@ -23,6 +23,9 @@ export default class Subscriber {
     // stores the single key on which to fire updates if this is a single key subscriber
     _singlePropSubscriber = null
 
+    // stores filters
+    _filters = {}
+
     /**
     * Create a subscriber
     * @param { callback } callback - function that will be called with updated values
@@ -31,7 +34,6 @@ export default class Subscriber {
     constructor(callback, filter = null) {
         this.setCallback(callback)
         this._applyFilter(filter)
-        this._applyF
     }
 
     /**
@@ -46,7 +48,7 @@ export default class Subscriber {
         } else if (typeof filter === 'string') {
             this._singlePropSubscriber = filter
         } else if (Array.isArray(filter)) {
-            props.forEach(this._addFilter)
+            filter.forEach(this._addFilter)
         } else {
             throw `${typeof filter} is not supported filter type! Must be array or string`
         }
@@ -80,15 +82,16 @@ export default class Subscriber {
      * @returns { boolean } returns wheather the subscriber should fire update callback
      */
     _shouldUpdate = (updateHash, updatedProps) => {
-        if (this._updateOnEveryProp) return true
+        if (this._updateOnEveryProp)
+            return true
 
-        if (this._singlePropSubscriber && updatedProps.hasOwnProperty(this._singlePropSubscriber)) return true
+        if (this._singlePropSubscriber && updatedProps.hasOwnProperty(this._singlePropSubscriber))
+            return true
 
-        if (this._isCached(updateHash)) {
+        if (this._isCached(updateHash))
             return this._cachedKeyCombinations[updateHash]
-        } else {
-            return Boolean(updatedProps.find(filter => this._filters[filter]))
-        }
+
+        return Boolean(updatedProps.find(filter => this._filters[filter]))
     }
 
     /**
@@ -106,16 +109,25 @@ export default class Subscriber {
      * @param {updateRequest} updateRequest - an update request containing state update hash and updated values
      */
     requestUpdate = ({ state, updateHash, updatedProps }) => {
-        if (this._updateOnEveryProp) {
-            this._callback(state)
-        }
 
-        const filteredState = filterObject(this._filters, state)
+        const shouldUpdate = this._shouldUpdate(updateHash, updatedProps)
 
-        if (this._shouldUpdate(updateHash, updatedProps)) {
-            if (this._paused) this._lastKnownValues = filteredState
-            else this._callback(filteredState)
+        if (shouldUpdate) {
+            
+            let updates = state
+            
+            if (!this._updateOnEveryProp) {
+                updates = filterObject(this._filters, state)
+            }
+            
+            this._lastKnownValues = updates
+
+            if(!this._paused){
+                this._callback(updates)
+            }
         }
+        
+        const isCached = this._cachedKeyCombinations[updateHash]
 
         if (!isCached) this._cachedKeyCombinations[updateHash] = shouldUpdate
     }

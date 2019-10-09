@@ -26,6 +26,11 @@ export default class Store {
      */
     get values() { return { ...this._values } }
 
+    // set accessor for values, should throw error
+    set values(_) { 
+        throw new Error('Setting values directly will not updade subscribers and is not supported. Use store.update({key: value,...}) instead')
+    }
+
     /**
      * Add props that will fire callbacks when changed
      * @private
@@ -66,7 +71,7 @@ export default class Store {
      * @param { string } prop - prop name
      * @returns { any } returns value for the prop
      */
-    _valueGetter = prop => this._values[prop]
+    _valueGetter = prop => this.values[prop]
 
     /**
      * Default setter for a prop
@@ -114,10 +119,10 @@ export default class Store {
      * @function subscribe
      * @param { callback } callback - function that will be called with updated values
      * @param { string | Array.<string> } [filter] - set of props that fill trigger update
-     * @returns { Subscriber } returns new Subscriber
+     * @returns { Subscriber } returns a new Subscriber instance
      */
     subscribe = (callback, filter) => {
-        if (!callback || !filter) throw 'must suply callback and filter'
+        if (!callback) throw 'must suply callback'
 
         const subscriber = new Subscriber(callback, filter)
 
